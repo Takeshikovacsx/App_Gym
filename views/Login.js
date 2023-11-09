@@ -4,8 +4,7 @@ import { useNavigation } from '@react-navigation/native'; // Importa useNavigati
 import FirebaseContext from '../context/firebase/firebaseContext';
 import firebase from '../firebase';
 
-function Login() {
-  const { onLogin } = useContext(FirebaseContext); // Utiliza useContext para acceder a funciones de FirebaseContext
+function Login() { 
   const navigation = useNavigation(); // Accede al objeto de navegación
 
   const [email, setEmail] = useState('');
@@ -33,6 +32,7 @@ function Login() {
         if (userData.contrasena === contrasena) {
           // Contraseña válida, inicio de sesión exitoso
           alert('Inicio de sesión exitoso');
+           // Llama a la función de FirebaseContext si es necesario
           navigation.navigate('Ulog'); // Utiliza el nombre de la pantalla, no una ruta
         } else {
           // Contraseña incorrecta
