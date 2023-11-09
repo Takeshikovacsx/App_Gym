@@ -13,7 +13,7 @@ import PedidosStage from './context/pedidos/pedidosStage';
 //importacion de vistas
 
 import Login from './views/Login';
-import Menu from './views/Menu';
+import Ulog from './views/Ulog';
 import FormPlato from './views/FormPlato';
 import DetallePedido from './views/DetallePedido';
 import NuevaOrden from './views/NuevaOrden';
@@ -35,8 +35,14 @@ const App = () => {
             name="Login"
             component={Login}
             options={{
-              title:"Menu"
+              title:"Login User"
             }}/>
+            <Stack.Screen 
+            name="Ulog" 
+            component={Ulog}
+            options={{
+              title:"User Panel"
+            }} />
 
           </Stack.Navigator>
         </NavigationContainer>

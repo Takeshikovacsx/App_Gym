@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { Link } from 'react-router-dom'; // Esto no es necesario en React Native
+import { useNavigation } from '@react-navigation/native'; // Importa useNavigation desde React Navigation
+import FirebaseContext from '../context/firebase/firebaseContext';
+import firebase from '../firebase';
 
 function Login() {
-  const navigation = useNavigation();
+  const { onLogin } = useContext(FirebaseContext); // Utiliza useContext para acceder a funciones de FirebaseContext
+  const navigation = useNavigation(); // Accede al objeto de navegación
+
   const [email, setEmail] = useState('');
   const [contrasena, setContrasena] = useState('');
 
@@ -18,13 +21,27 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      // Coloca aquí la lógica para autenticar con Firebase, como en tu código original
-      // ...
+      const userSnapshot = await firebase.db
+        .collection('Clientes')
+        .where('email', '==', email)
+        .get();
 
-      // Supongamos que la autenticación es exitosa
-      alert('Inicio de sesión exitoso');
-      onLogin();
-      navigation.navigate('Menu'); // Reemplaza 'Ulog' con la ruta correcta
+      if (!userSnapshot.empty) {
+        const userDoc = userSnapshot.docs[0];
+        const userData = userDoc.data();
+
+        if (userData.contrasena === contrasena) {
+          // Contraseña válida, inicio de sesión exitoso
+          alert('Inicio de sesión exitoso');
+          navigation.navigate('Ulog'); // Utiliza el nombre de la pantalla, no una ruta
+        } else {
+          // Contraseña incorrecta
+          alert('Contraseña incorrecta');
+        }
+      } else {
+        // Usuario no encontrado
+        alert('Usuario no encontrado');
+      }
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
       alert('Ocurrió un error al iniciar sesión');
@@ -33,12 +50,12 @@ function Login() {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', padding: 16 }}>
-      <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center' }}>
+      <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center', color: 'black', marginBottom: 20 }}>
         Sign in to your account
       </Text>
 
       <View style={{ marginTop: 20 }}>
-        <Text>Email address</Text>
+        <Text style={{ color: 'black' }}>Email address</Text>
         <TextInput
           value={email}
           onChangeText={handleEmailChange}
@@ -48,12 +65,13 @@ function Login() {
             borderColor: 'gray',
             borderRadius: 4,
             padding: 8,
+            color: 'black'
           }}
         />
       </View>
 
       <View style={{ marginTop: 20 }}>
-        <Text>Password</Text>
+        <Text style={{ color: 'black' }}>Password</Text>
         <TextInput
           value={contrasena}
           onChangeText={handleContrasenaChange}
@@ -64,6 +82,7 @@ function Login() {
             borderColor: 'gray',
             borderRadius: 4,
             padding: 8,
+            color: 'black'
           }}
         />
       </View>
@@ -75,18 +94,11 @@ function Login() {
           borderRadius: 4,
           padding: 8,
           alignItems: 'center',
+          marginTop: 20
         }}
       >
         <Text style={{ color: 'white', fontWeight: 'bold' }}>Sign in</Text>
       </TouchableOpacity>
-
-      <Text style={{ marginTop: 20, textAlign: 'center', color: 'gray' }}>
-        Not a member?{' '}
-        {/* Debes implementar la navegación a la pantalla de registro */}
-        <Link to="/Registro" style={{ fontWeight: 'bold', color: 'indigo' }}>
-          Register
-        </Link>
-      </Text>
     </View>
   );
 }
