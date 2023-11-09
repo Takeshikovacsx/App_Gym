@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import FirebaseContext from '../context/firebase/firebaseContext';
+import firebase from '../firebase';
 import Svg, { Path } from 'react-native-svg'; // Asegúrate de que react-native-svg esté instalado
 
 const Login = () => {
@@ -18,7 +20,26 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      // Tu código para iniciar sesión
+      const userSnapshot = await firebase.db
+        .collection('Clientes')
+        .where('email', '==', email)
+        .get();
+      if (!userSnapshot.empty) {
+        const userDoc = userSnapshot.docs[0];
+        const userData = userDoc.data();
+        if (userData.contrasena === contrasena) {
+          // Contraseña válida, inicio de sesión exitoso
+          alert('Inicio de sesión exitoso');
+           // Llama a la función de FirebaseContext si es necesario
+          navigation.navigate('Ulog'); // Utiliza el nombre de la pantalla, no una ruta
+        } else {
+          // Contraseña incorrecta
+          alert('Contraseña incorrecta');
+        }
+      } else {
+        // Usuario no encontrado
+        alert('Usuario no encontrado');
+      }
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
       alert('Ocurrió un error al iniciar sesión');
