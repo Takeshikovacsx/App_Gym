@@ -14,6 +14,7 @@ import Login from './views/Login';
 import Ulog from './views/Ulog';
 import Footer from './views/Footer';
 import ViewRoutines from './views/Viewroutines';
+import AssignedRoutines from './views/AssignedRoutines';
 import FormPlato from './views/FormPlato';
 import DetallePedido from './views/DetallePedido';
 import NuevaOrden from './views/NuevaOrden';
@@ -46,7 +47,7 @@ const App = () => {
                   title: "¡Welcome to vitality Gym! ",
                   headerTitleAlign: 'center',
                   headerStyle: {
-                    backgroundColor: 'indigo'
+                    backgroundColor: '#2D3748'
                   },
                   headerTintColor: 'white'
                 }}
@@ -58,6 +59,10 @@ const App = () => {
                 options={{
                   title: "User Panel",
                   headerTitleAlign: 'center',
+                  headerStyle: {
+                    backgroundColor: '#2D3748'
+                  },
+                  headerTintColor: 'white',
                   headerLeft: () => <></>
                 }}
               />
@@ -66,9 +71,30 @@ const App = () => {
                 component={ViewRoutines}
                 options={{
                   title: "View Routines",
-                  headerTitleAlign: 'center',
+                  headerStyle: {
+                    backgroundColor: '#2D3748'
+                  },
+                  headerTintColor: 'white',
+                  headerTitleAlign: 'center'
                 }}
+
+
+
               />
+
+              <Stack.Screen name="AssignedRoutines"
+                component={AssignedRoutines}
+                options={{
+                  title: "Assigned Routines",
+                  headerStyle: {
+                    backgroundColor: '#2D3748'
+                  },
+                  headerTintColor: 'white',
+                  headerTitleAlign: 'center'
+                }}
+                 />
+
+
             </Stack.Navigator>
           </NavigationContainer>
         </PedidosStage>

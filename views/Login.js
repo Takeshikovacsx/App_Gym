@@ -5,7 +5,7 @@ import FirebaseContext from '../context/firebase/firebaseContext';
 import firebase from '../firebase';
 import Svg, { Path } from 'react-native-svg'; // Asegúrate de que react-native-svg esté instalado
 
-const Login = ( ) => {
+const Login = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [contrasena, setContrasena] = useState('');
@@ -31,7 +31,9 @@ const Login = ( ) => {
           // Contraseña válida, inicio de sesión exitoso
           alert('Inicio de sesión exitoso');
 
-           // Llama a la función de FirebaseContext si es necesario
+          const userId = userDoc.id; // Obten el ID del cliente
+          navigation.navigate('AssignedRoutines', { userId });
+          // Llama a la función de FirebaseContext si es necesario
           navigation.navigate('Ulog'); // Utiliza el nombre de la pantalla, no una ruta
         } else {
           // Contraseña incorrecta
@@ -49,10 +51,10 @@ const Login = ( ) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.iconContainer} > 
-      <Svg width="100" height="100" viewBox="0 0 24 24">
-        <Path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632" fill="black" />
-      </Svg>
+      <View style={styles.iconContainer} >
+        <Svg width="100" height="100" viewBox="0 0 24 24">
+          <Path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632" fill="black" />
+        </Svg>
       </View>
       <Text style={styles.title}>Sign in to your account</Text>
 
@@ -120,7 +122,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   button: {
-    backgroundColor: 'indigo',
+    backgroundColor: '#2D3748',
     borderRadius: 4,
     padding: 12,
     alignItems: 'center',

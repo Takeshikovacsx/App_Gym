@@ -52,11 +52,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
+    color:'#2D3748',
   },
   rutinaContainer: {
     marginBottom: 20,
     borderWidth: 1,
     borderColor: 'gray',
+    backgroundColor: '#2D3748',
     borderRadius: 8,
     padding: 16,
   },

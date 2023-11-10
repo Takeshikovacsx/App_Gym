@@ -11,7 +11,7 @@ const Footer = () => {
 
 const styles = StyleSheet.create({
   footer: {
-    backgroundColor: 'indigo', // Puedes cambiar el color de fondo según tus preferencias
+    backgroundColor: '#2D3748', // Puedes cambiar el color de fondo según tus preferencias
     padding: 10,
   },
   footerText: {
