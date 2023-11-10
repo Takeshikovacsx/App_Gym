@@ -13,6 +13,7 @@ import PedidosStage from './context/pedidos/pedidosStage';
 import Login from './views/Login';
 import Ulog from './views/Ulog';
 import Footer from './views/Footer';
+import ViewRoutines from './views/Viewroutines';
 import FormPlato from './views/FormPlato';
 import DetallePedido from './views/DetallePedido';
 import NuevaOrden from './views/NuevaOrden';
@@ -23,7 +24,7 @@ const Stack = createStackNavigator();
 
 const App = () => {
 
-  
+
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -44,7 +45,7 @@ const App = () => {
                 options={{
                   title: "¡Welcome to vitality Gym! ",
                   headerTitleAlign: 'center',
-                  headerStyle:{
+                  headerStyle: {
                     backgroundColor: 'indigo'
                   },
                   headerTintColor: 'white'
@@ -60,11 +61,19 @@ const App = () => {
                   headerLeft: () => <></>
                 }}
               />
+
+              <Stack.Screen name="ViewRoutines"
+                component={ViewRoutines}
+                options={{
+                  title: "View Routines",
+                  headerTitleAlign: 'center',
+                }}
+              />
             </Stack.Navigator>
           </NavigationContainer>
         </PedidosStage>
       </FirebaseStage>
-      <Footer/>
+      <Footer />
     </>
   );
 }

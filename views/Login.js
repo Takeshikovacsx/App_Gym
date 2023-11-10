@@ -5,7 +5,7 @@ import FirebaseContext from '../context/firebase/firebaseContext';
 import firebase from '../firebase';
 import Svg, { Path } from 'react-native-svg'; // Asegúrate de que react-native-svg esté instalado
 
-const Login = () => {
+const Login = ( ) => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [contrasena, setContrasena] = useState('');
@@ -30,6 +30,7 @@ const Login = () => {
         if (userData.contrasena === contrasena) {
           // Contraseña válida, inicio de sesión exitoso
           alert('Inicio de sesión exitoso');
+
            // Llama a la función de FirebaseContext si es necesario
           navigation.navigate('Ulog'); // Utiliza el nombre de la pantalla, no una ruta
         } else {
