@@ -16,7 +16,7 @@ const AssignedRoutines = () => {
         if (userId) {
           const assignedRoutinesSnapshot = await firebase.db
             .collection('AsignacionesRutinas')
-            .where('cliente', '==', userId)
+            .where('clienteid', '==', userId)
             .get();
 
           const assignedRoutinesData = assignedRoutinesSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
@@ -37,14 +37,12 @@ const AssignedRoutines = () => {
       onPress={() =>  {
         
         // Navegar a una pantalla de detalle o hacer algo con la rutina seleccionada
+        navigation.navigate('DetalleRutina', { rutina: item });
         console.log('Rutina seleccionada:', item);
       }}
     >
       <Text style={styles.routineName}>{item.nombreRutina}</Text>
-      <Text>{`Tipo de Ejercicio: ${item.tipoEjercicio}`}</Text>
-      <Text>{`Duración de la Rutina: ${item.duracionRutina} minutos`}</Text>
-      <Text>{`Descripción: ${item.descripcion}`}</Text>
-      {/* Agrega aquí cualquier otra propiedad de la rutina que desees mostrar */}
+
     </TouchableOpacity>
   );
 

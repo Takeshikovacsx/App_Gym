@@ -9,14 +9,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import FirebaseStage from './context/firebase/firebaseStage';
 import PedidosStage from './context/pedidos/pedidosStage';
 
+
 // Importación de vistas
 import Login from './views/Login';
 import Ulog from './views/Ulog';
 import Footer from './views/Footer';
 import ViewRoutines from './views/Viewroutines';
 import AssignedRoutines from './views/AssignedRoutines';
+import DetalleRutina from './views/DetalleRutina';
 import FormPlato from './views/FormPlato';
-import DetallePedido from './views/DetallePedido';
+import DetallePedido from './views/DetalleRutina';
 import NuevaOrden from './views/NuevaOrden';
 import ProgresoPedido from './views/ProgresoPedido';
 import ResumenPedido from './views/ResumenPedido';
@@ -92,8 +94,20 @@ const App = () => {
                   headerTintColor: 'white',
                   headerTitleAlign: 'center'
                 }}
-                 />
-
+              />
+              <Stack.Screen
+  name="AssignedRoutines"
+  component={AssignedRoutines}
+  options={{
+    title: "Assigned Routines",
+    headerStyle: {
+      backgroundColor: '#2D3748'
+    },
+    headerTintColor: 'white',
+    headerTitleAlign: 'center'
+  }}
+/>
+             
 
             </Stack.Navigator>
           </NavigationContainer>
