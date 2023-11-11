@@ -95,7 +95,19 @@ const App = () => {
                   headerTitleAlign: 'center'
                 }}
               />
-              <Stack.Screen name="DetalleRutina" component={DetalleRutina} />
+              <Stack.Screen name="DetalleRutina"
+               component={DetalleRutina}
+               options={{
+                title: "Routine Detail",
+                headerStyle: {
+                  backgroundColor: '#2D3748'
+                },
+                headerTintColor: 'white',
+                headerTitleAlign: 'center'
+              }}
+               
+               
+               />
              
 
             </Stack.Navigator>

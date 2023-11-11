@@ -33,12 +33,18 @@ const DetalleRutina = ({ route }) => {
 
       {detalleAsignacion && detalleRutina ? (
         <View style={styles.asignacionContainer}>
-          <Text style={styles.asignacionTitle}>Nombre del Cliente: {detalleAsignacion?.nombreCliente}</Text>
-          <Text>{`Rutina Asignada: ${detalleAsignacion?.nombreRutina}`}</Text>
-          <Text>{`Fecha de Asignación: ${detalleAsignacion?.fechaAsignacion.toDate().toLocaleDateString()}`}</Text>
+          <Text style={styles.asignacionTitle}>Nombre de la rutina: {detalleAsignacion?.nombreRutina}</Text>
+
+          
           
           {/* Mostrar la imagen de la rutina */}
           <Image source={{ uri: detalleRutina?.imagen }} style={styles.rutinaImage} />
+
+          {/* Mostrar toda la información de la rutina */}
+          <Text style={styles.rutinaInfo}>Tipo de Ejercicio: {detalleRutina?.tipoEjercicio}</Text>
+          <Text style={styles.rutinaInfo}>Duración: {detalleRutina?.duracionRutina} minutos</Text>
+          <Text style={styles.rutinaInfo}>Descripción: {detalleRutina?.descripcion}</Text>
+          <Text>{`Fecha de Asignación: ${detalleAsignacion?.fechaAsignacion.toDate().toLocaleDateString()}`}</Text>
 
           {/* Agrega aquí cualquier otra propiedad de la asignación o la rutina que desees mostrar */}
         </View>
@@ -80,6 +86,10 @@ const styles = StyleSheet.create({
     height: 200,
     marginBottom: 8,
     borderRadius: 8,
+  },
+  rutinaInfo: {
+    color: 'white',
+    marginTop: 8,
   },
 });
 

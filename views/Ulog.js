@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 function Ulog({ navigation }) {
   const handleLogout = () => {
@@ -16,12 +16,27 @@ function Ulog({ navigation }) {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ fontSize: 20, fontWeight: 'bold', color:'black' }}>Bienvenido a Ulog</Text>
+    <View style={{    flex: 1,
+      justifyContent: 'center',
+      padding: 16, }}>
+      <Text style={{ fontSize: 20, fontWeight: 'bold', color:'black',    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+    color:'#2D3748', }}>Bienvenido a Ulog</Text>
 
-      <Button style={styles.button} title="Rutinas" onPress={handleViewRoutines} />
-      <Button style={styles.button} title="Ver mis Rutinas" onPress={handleAssignedRoutines} />
-      <Button style={styles.button} title="Cerrar sesión" onPress={handleLogout} />
+   
+      <TouchableOpacity style={styles.button} onPress={handleViewRoutines}>
+        <Text style={styles.buttonText}>Rutinas</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={handleAssignedRoutines}>
+        <Text style={styles.buttonText}>Ver mis Rutinas</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={handleLogout}>
+        <Text style={styles.buttonText}>Cerrar sesión</Text>
+      </TouchableOpacity>
 
     </View>
   );
@@ -43,7 +58,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   backButtonText: {
-    color: 'white',
+    fontSize: 16,
     fontWeight: 'bold',
   },
 });
