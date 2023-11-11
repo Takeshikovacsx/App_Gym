@@ -17,6 +17,7 @@ import Footer from './views/Footer';
 import ViewRoutines from './views/Viewroutines';
 import AssignedRoutines from './views/AssignedRoutines';
 import DetalleRutina from './views/DetalleRutina';
+import AssignedClass from './views/AssignedClass';
 import FormPlato from './views/FormPlato';
 import DetallePedido from './views/DetalleRutina';
 import NuevaOrden from './views/NuevaOrden';
@@ -96,19 +97,34 @@ const App = () => {
                 }}
               />
               <Stack.Screen name="DetalleRutina"
-               component={DetalleRutina}
-               options={{
-                title: "Routine Detail",
-                headerStyle: {
-                  backgroundColor: '#2D3748'
-                },
-                headerTintColor: 'white',
-                headerTitleAlign: 'center'
-              }}
-               
-               
-               />
-             
+                component={DetalleRutina}
+                options={{
+                  title: "Routine Detail",
+                  headerStyle: {
+                    backgroundColor: '#2D3748'
+                  },
+                  headerTintColor: 'white',
+                  headerTitleAlign: 'center'
+                }}
+
+
+              />
+
+              <Stack.Screen name="AssignedClass"
+                component={AssignedClass}
+                options={{
+                  title: "Routine Detail",
+                  headerStyle: {
+                    backgroundColor: '#2D3748'
+                  },
+                  headerTintColor: 'white',
+                  headerTitleAlign: 'center'
+                }}
+
+
+              />
+
+
 
             </Stack.Navigator>
           </NavigationContainer>

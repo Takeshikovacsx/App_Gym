@@ -33,6 +33,8 @@ const Login = () => {
 
           const userId = userDoc.id; // Obten el ID del cliente
           navigation.navigate('AssignedRoutines', { userId });
+
+          navigation.navigate('AssignedClass', { userId });
           // Llama a la función de FirebaseContext si es necesario
           navigation.navigate('Ulog'); // Utiliza el nombre de la pantalla, no una ruta
         } else {

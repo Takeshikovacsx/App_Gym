@@ -15,6 +15,10 @@ function Ulog({ navigation }) {
     navigation.navigate('AssignedRoutines');
   };
 
+  const handleAssignedClass = () => {
+    navigation.navigate('AssignedClass');
+  };
+
   return (
     <View style={{    flex: 1,
       justifyContent: 'center',
@@ -32,6 +36,10 @@ function Ulog({ navigation }) {
 
       <TouchableOpacity style={styles.button} onPress={handleAssignedRoutines}>
         <Text style={styles.buttonText}>Ver mis Rutinas</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={handleAssignedClass}>
+        <Text style={styles.buttonText}>Elegir Clase</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={handleLogout}>
