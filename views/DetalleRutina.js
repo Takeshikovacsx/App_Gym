@@ -1,46 +1,49 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, Image, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import FirebaseContext from '../context/firebase/firebaseContext';
-import { useRoute } from '@react-navigation/native';
 
-const DetalleRutina = () => {
+const DetalleRutina = ({ route }) => {
   const { firebase } = useContext(FirebaseContext);
+  const [detalleAsignacion, setDetalleAsignacion] = useState(null);
   const [detalleRutina, setDetalleRutina] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const route = useRoute();
-  const { rutinaId } = route.params;
 
   useEffect(() => {
-    const fetchDetalleRutina = async () => {
+    const fetchDetalleAsignacion = async () => {
       try {
-        const rutinaRef = await firebase.db.collection('Rutinas').doc(rutinaId).get();
+        const asignacionId = route.params?.rutina.id;
+        const asignacionRef = await firebase.db.collection('AsignacionesRutinas').doc(asignacionId).get();
+        const asignacionData = asignacionRef.data();
+        setDetalleAsignacion(asignacionData);
+
+        // Obtener detalles de la rutina asociada
+        const rutinaRef = await firebase.db.collection('Rutinas').doc(asignacionData?.rutinaid).get();
         const rutinaData = rutinaRef.data();
         setDetalleRutina(rutinaData);
       } catch (error) {
-        console.error('Error al obtener detalles de la rutina:', error);
-        // Manejar el error, mostrar mensaje al usuario, etc.
-      } finally {
-        setIsLoading(false); // Indica que la carga ha terminado, ya sea con éxito o error
+        console.error('Error al obtener detalles de la asignación:', error);
       }
     };
 
-    fetchDetalleRutina();
-  }, [firebase, rutinaId]);
+    fetchDetalleAsignacion();
+  }, [firebase, route.params?.rutina.id]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Detalles de la Rutina Asignada</Text>
+      <Text style={styles.title}>Detalles de la Asignación</Text>
 
-      {isLoading ? (
-        <ActivityIndicator size="large" color="#2D3748" />
-      ) : (
-        <View style={styles.rutinaContainer}>
-          <Text style={styles.rutinaTitle}>Nombre de la Rutina: {detalleRutina?.nombreRutina}</Text>
+      {detalleAsignacion && detalleRutina ? (
+        <View style={styles.asignacionContainer}>
+          <Text style={styles.asignacionTitle}>Nombre del Cliente: {detalleAsignacion?.nombreCliente}</Text>
+          <Text>{`Rutina Asignada: ${detalleAsignacion?.nombreRutina}`}</Text>
+          <Text>{`Fecha de Asignación: ${detalleAsignacion?.fechaAsignacion.toDate().toLocaleDateString()}`}</Text>
+          
+          {/* Mostrar la imagen de la rutina */}
           <Image source={{ uri: detalleRutina?.imagen }} style={styles.rutinaImage} />
-          <Text style={styles.rutinaText}>Tipo de Ejercicio: {detalleRutina?.tipoEjercicio}</Text>
-          <Text style={styles.rutinaText}>Duración de la Rutina: {detalleRutina?.duracionRutina} minutos</Text>
-          <Text style={styles.rutinaText}>Descripción: {detalleRutina?.descripcion}</Text>
+
+          {/* Agrega aquí cualquier otra propiedad de la asignación o la rutina que desees mostrar */}
         </View>
+      ) : (
+        <Text>No hay detalles disponibles.</Text>
       )}
     </View>
   );
@@ -59,14 +62,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: '#2D3748',
   },
-  rutinaContainer: {
+  asignacionContainer: {
     borderWidth: 1,
     borderColor: 'gray',
     backgroundColor: '#2D3748',
     borderRadius: 8,
     padding: 16,
   },
-  rutinaTitle: {
+  asignacionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 8,
@@ -77,11 +80,6 @@ const styles = StyleSheet.create({
     height: 200,
     marginBottom: 8,
     borderRadius: 8,
-  },
-  rutinaText: {
-    fontSize: 16,
-    marginBottom: 4,
-    color: 'white',
   },
 });
 

@@ -37,12 +37,13 @@ const AssignedRoutines = () => {
       onPress={() =>  {
         
         // Navegar a una pantalla de detalle o hacer algo con la rutina seleccionada
-        navigation.navigate('DetalleRutina', { rutina: item });
+        navigation.navigate('DetalleRutina', { userId });
         console.log('Rutina seleccionada:', item);
       }}
     >
       <Text style={styles.routineName}>{item.nombreRutina}</Text>
-
+      <Text>{`Tipo de Ejercicio: ${item.tipoEjercicio}`}</Text>
+      {/* Agrega aquí cualquier otra propiedad de la rutina que desees mostrar */}
     </TouchableOpacity>
   );
 
