@@ -37,7 +37,7 @@ const AssignedRoutines = () => {
       onPress={() =>  {
         
         // Navegar a una pantalla de detalle o hacer algo con la rutina seleccionada
-        navigation.navigate('DetalleRutina', { userId });
+        navigation.navigate('DetalleRutina', { rutina: item });
         console.log('Rutina seleccionada:', item);
       }}
     >
